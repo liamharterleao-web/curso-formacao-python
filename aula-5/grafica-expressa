@@ -1,0 +1,119 @@
+
+import sys
+
+gerar_impressao = [str, bool, int, bool, float, str]
+
+""""
+gerar_impressao[0] = str #nome
+gerar_impressao[1] = bool #cupom?
+gerar_impressao[2] = int  #quantidade de páginas
+gerar_impressao[3] = bool #encadernação? sim/não
+gerar_impressao[4] = float #valor por página
+gerar_impressao[5] = str #forma de pagamento
+"""
+
+nome = input("Qual o nome do cliente?")
+tipo = input("Qual o tipo de impressão? pb/colorida/foto")
+cupom = input("Possui cupom de desconto? s/n")
+qtd = int(input("Qual a quantidade de páginas?"))
+encadernar = input("Deseja encadernar? s/n")
+forma_pagamento = input("Qual a forma de pagamento? dinheiro/cartão/pix")
+
+desconto_por_pagina = 0
+desconto_percentual = 0.00
+acrescimo_percentual = 0.00
+acrescimo = 0
+
+match tipo:
+    case "pb":
+        gerar_impressao[0] = nome
+
+        if cupom == "s":
+            gerar_impressao[1] = True
+            gerar_impressao[4] = 0.15
+            desconto_por_pagina = 0.02
+        else:
+            gerar_impressao[1] = False
+            gerar_impressao[4] = 0.15
+        
+        gerar_impressao[2] = qtd
+
+        if encadernar == "s":
+            gerar_impressao[3] = True
+        else:
+            gerar_impressao[3] = False
+    
+
+    case "colorida":
+        gerar_impressao[0] = nome
+
+        if cupom == "s":
+            gerar_impressao[1] = True
+            gerar_impressao[4] = 0.25
+            desconto_por_pagina = 0.05
+        else:
+            gerar_impressao[1] = False
+            gerar_impressao[4] = 0.25
+        
+        gerar_impressao[2] = qtd
+
+        if encadernar == "s":
+            gerar_impressao[3] = True
+        else:
+            gerar_impressao[3] = False
+    
+    case "foto":
+        gerar_impressao[0] = nome
+
+        if cupom == "s":
+            gerar_impressao[1] = True
+            gerar_impressao[4] = 3.50
+            desconto_por_pagina = 0.07
+        else:
+            gerar_impressao[1] = False
+            gerar_impressao[4] = 1.50
+        
+        gerar_impressao[2] = qtd
+
+        if encadernar == "s":
+            gerar_impressao[3] = True
+        else:
+            gerar_impressao[3] = False
+
+subtotal = gerar_impressao[2] * gerar_impressao[4] * desconto_por_pagina
+
+if gerar_impressao[1] == True:
+    texto_cupom = "utilizou cupom de desconto"
+else:
+    texto_cupom = "não utilizou cupom"
+
+print()
+print("-" * 32)
+print(f"O cliente {gerar_impressao[0]} -> {texto_cupom}")
+print("-" * 32)
+print("=" * 32)
+print(f"A quantidade de páginas: {gerar_impressao[2]} * valor por impressão: {gerar_impressao[4]}")
+
+if encadernar == "s":
+    print(f"Será encadernado pelo valor adicional de 5 reais")
+    acrescimo += 5
+else:
+    print(f"Não há necessidade de encadernamento")
+
+print("=" * 32)
+print()
+print("=" * 32)
+
+if forma_pagamento == "dinheiro":
+    desconto_percentual += 0.10 #desconto de 10%
+elif forma_pagamento == "cartão":
+    acrescimo_percentual += 0.05 #acrescimo de 5%
+else:
+    sys.exit(f"Não existe a forma de pagamento {forma_pagamento}")
+
+subtotal = ((subtotal + acrescimo) * ((1 + acrescimo_percentual) - desconto_percentual) )
+print(f"TOTAL: R$ {subtotal:.2f}")    
+
+print("=" * 32)
+print()
+print(gerar_impressao)
