@@ -14,3 +14,11 @@ temperatura = float(input("Temperatura (C): "))
 chuva = input("Chuva (s/n): ")
 
 # complete: and, quatro caminhos com mensagem
+if temperatura >= 30 and chuva == "s":
+    print("alerta: risco de temporal quente")
+elif temperatura >= 30 and chuva == "n":
+    print("calor seco")
+elif temperatura < 30 and chuva == "s":
+    print("chuva sem calor extremo")
+else:
+    print("tempo estável")

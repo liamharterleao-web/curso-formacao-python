@@ -24,3 +24,23 @@ idade = int(input("Idade: "))
 estudante = input("Estudante (s/n): ")
 
 # complete: match + and
+
+if idade < 1:
+    print("Recusado")
+
+match tipo:
+    case "pista" if idade >= 16:
+        print("Total: R$ 80.00 - PISTA")
+    case "meia" if idade >= 16 and estudante in ["s", "n"]:
+        if estudante == "s":
+            print("Total: R$ 40.00 - MEIA")
+        else:
+            print("Sem meia / recusado")
+    case "camarote":
+        if idade >= 18:
+            print("Total: R$ 200.00 - CAMAROTE")
+        else:
+            print("Idade recusada para camarote")
+
+if tipo not in ["pista", "camarote", "meia"]:
+    print("Tipo desconhecido")

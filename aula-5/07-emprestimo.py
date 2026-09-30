@@ -14,3 +14,9 @@ renda = float(input("Renda mensal: "))
 score = int(input("Score de credito: "))
 
 # complete: and / or, mensagens
+if renda <= 0 or score < 0:
+    print("Recusado")
+if renda >= 2000 and score >= 600:
+    print("Aprovado")
+else:
+    print("renda baixa, score baixo ou ambos")
