@@ -1,5 +1,5 @@
 import os
-from teclas import get_key
+from biblioteca import get_key
 
 def draw_screen(matricula, selected):
     os.system("cls" if os.name == "nt" else "clear")
